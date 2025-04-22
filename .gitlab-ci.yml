@@ -1,0 +1,47 @@
+image: maven:3.9.6-eclipse-temurin-21
+
+stages:
+  - test
+  - build
+
+services:
+  - name: postgres:15
+    alias: db
+  - name: redis:7.2
+    alias: redis
+
+variables:
+  POSTGRES_DB: mynewdatabase
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: root
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/mynewdatabase"
+  SPRING_DATASOURCE_USERNAME: "postgres"
+  SPRING_DATASOURCE_PASSWORD: "root"
+  SPRING_REDIS_HOST: redis
+  SPRING_REDIS_PORT: 6379
+
+cache:
+  key: maven-dependencies
+  paths:
+    - ~/.m2/repository
+  policy: pull-push
+
+before_script:
+  - echo "Waiting for PostgreSQL to start..."
+  - sleep 10
+
+test:
+  stage: test
+  script:
+    - mvn test --batch-mode
+  only:
+    - dev
+    - merge_requests
+
+build:
+  stage: build
+  script:
+    - mvn package --batch-mode
+  only:
+    - dev
+    - merge_requests

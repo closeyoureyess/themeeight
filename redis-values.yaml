@@ -1,0 +1,5 @@
+# redis-values.yaml
+architecture: standalone   # Режим standalone: один узел Redis (без реплик)
+auth:
+  enabled: false           # Отключить требование пароля (без авторизации)
+# В результате Redis будет работать без пароля, любой под в кластере сможет подключиться.

@@ -1,0 +1,55 @@
+apiVersion: apps/v1 # какую версию API мастер-ноды использовать
+kind: Deployment #Корень, отвечает за развертывание приложения в кубернетисе
+metadata:
+  name: spring-to-do
+spec:
+  replicas: 1
+  selector: # т.е имя для поиска и создания реплики
+    matchLabels: # Сколько реплик создать для приложения с наименованием:
+      app: spring-to-do
+  template:
+    metadata:
+      labels:
+        app: spring-to-do # приложение внутри кубернетиса
+    spec:
+      containers:
+        - name: spring-to-do
+          image: steadydev/spring-to-do-image:1.0.0
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: "512Mi"
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+              ephemeral-storage: "1Gi"
+          env:
+            - name: APP_NAME
+              value: "SpringToDo"
+            - name: REDIS_HOST
+              value: "my-redis-master"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: BASEPROJECT_DATABASE_HOST
+              value: "my-postgres-postgresql"
+            - name: BASEPROJECT_DATABASE_PORT
+              value: "5432"
+            - name: BASEPROJECT_DATABASE_NAME
+              value: "mynewdatabase"
+            - name: BASEPROJECT_DATABASE_USERNAME
+              value: postgres
+            - name: BASEPROJECT_DATABASE_PASSWORD
+              value: root
+            - name: ACTUATOR_SERVER_PORT
+              value: "8080"
+            - name: ACTUATOR_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+              value: "health"
+            - name: ACTUATOR_ENDPOINTS_HEALTH_SHOW_DETAILS
+              value: "when_authorized"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
