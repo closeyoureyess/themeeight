@@ -1,5 +1,6 @@
 package com.effective.themeeight.services;
 
+import com.effective.themeeight.AbstractContainerTest;
 import com.effective.themeeight.dto.TaskDto;
 import com.effective.themeeight.entities.Task;
 import com.effective.themeeight.exceptions.DataCalendarNotBeNullException;
@@ -21,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-class TaskServicesTest {
+class TaskServicesTest extends AbstractContainerTest {
 
     @Mock
     private TaskMapper taskMapper;

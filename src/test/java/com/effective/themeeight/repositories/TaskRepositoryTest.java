@@ -1,5 +1,6 @@
 package com.effective.themeeight.repositories;
 
+import com.effective.themeeight.AbstractContainerTest;
 import com.effective.themeeight.entities.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-class TaskRepositoryTest {
+class TaskRepositoryTest extends AbstractContainerTest {
 
     @Mock
     private JdbcTemplate jdbcTemplate;

@@ -1,5 +1,6 @@
 package com.effective.themeeight.controllers;
 
+import com.effective.themeeight.AbstractContainerTest;
 import com.effective.themeeight.dto.TaskDto;
 import com.effective.themeeight.services.TaskService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class TaskControllerTest {
+class TaskControllerTest extends AbstractContainerTest {
 
     @Autowired
     private MockMvc mockMvc;
