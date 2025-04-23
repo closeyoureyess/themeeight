@@ -12,15 +12,17 @@ pipeline {
                 sh 'java -version'
                 sh 'chmod +x mvnw'
 
-                steps {
+                script {
                    withCredentials([
                        string(credentialsId: 'dbhost', variable: 'BASEPROJECT_DATABASE_HOST'),
                        string(credentialsId: 'dbport', variable: 'BASEPROJECT_DATABASE_PORT'),
                        string(credentialsId: 'dbname', variable: 'BASEPROJECT_DATABASE_NAME'),
                        string(credentialsId: 'dbuser', variable: 'BASEPROJECT_DATABASE_USER'),
                        string(credentialsId: 'dbpassword', variable: 'BASEPROJECT_DATABASE_PASSWORD')
-                       ])
+                       ]) {
                    sh './mvnw clean install'
+                   }
+                  }
                 }
             }
         }
