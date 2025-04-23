@@ -1,7 +1,7 @@
 package com.effective.themeeight.mappers;
 
-import com.emobile.springtodo.dto.TaskDto;
-import com.emobile.springtodo.entities.Task;
+import com.effective.themeeight.dto.TaskDto;
+import com.effective.themeeight.entities.Task;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
