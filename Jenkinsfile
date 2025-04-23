@@ -4,6 +4,7 @@ pipeline {
     stages {
         stage('Сборка') {
             steps {
+                sh 'chmod +x mvnw'
                 sh './mvnw clean install'
             }
         }
