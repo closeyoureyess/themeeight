@@ -15,6 +15,7 @@ public abstract class AbstractContainerTest {
 
     static {
         POSTGRES_CONTAINER = new PostgreSQLContainer("postgres:13.4");
+        POSTGRES_CONTAINER.start();
         REDIS_CONTAINER = new RedisContainer("redis:7.2.0");
         REDIS_CONTAINER.start();
     }
