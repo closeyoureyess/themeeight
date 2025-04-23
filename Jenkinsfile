@@ -3,6 +3,7 @@ pipeline {
     tools {
         jdk 'jdk21'
     }
+
     stages {
         stage('Сборка') {
             steps {
