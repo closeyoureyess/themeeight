@@ -1,9 +1,15 @@
 pipeline {
     agent any // можно запускать на любом доступном агенте
 
+    tools {
+            jdk 'jdk21' // имя должно совпадать с тем, что ты задал в конфигурации
+    }
+
     stages {
         stage('Сборка') {
             steps {
+                sh 'echo $JAVA_HOME'
+                sh 'java -version'
                 sh 'chmod +x mvnw'
                 sh './mvnw clean install'
             }
