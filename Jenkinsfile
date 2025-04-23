@@ -22,6 +22,7 @@ pipeline {
             steps {
                 sh 'docker build -t steadydev/themeeight .'
             }
+
         }
 
         stage('Push в Docker Hub') {
