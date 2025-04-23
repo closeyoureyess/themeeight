@@ -13,7 +13,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh 'docker build -t твой_логин/имя_проекта .'
+                sh 'docker build -t steadydev/themeeight .'
             }
         }
 
@@ -25,7 +25,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
                 usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                    sh 'docker push steadydev/themeeight-service'
+                    sh 'docker push steadydev/themeeight'
                 }
             }
         }
