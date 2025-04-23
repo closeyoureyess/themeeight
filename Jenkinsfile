@@ -1,29 +1,30 @@
 pipeline {
-    agent any //
+    agent any
 
     tools {
-            jdk 'jdk21'
+        jdk 'jdk21'
     }
 
-     stage('Сборка') {
-         steps {
-             sh 'echo $JAVA_HOME'
-             sh 'java -version'
-             sh 'chmod +x mvnw'
+    stages {
+        stage('Сборка') {
+            steps {
+                sh 'echo $JAVA_HOME'
+                sh 'java -version'
+                sh 'chmod +x mvnw'
 
-             script {
-                 withCredentials([
-                     string(credentialsId: 'dbhost', variable: 'BASEPROJECT_DATABASE_HOST'),
-                     string(credentialsId: 'dbport', variable: 'BASEPROJECT_DATABASE_PORT'),
-                     string(credentialsId: 'dbname', variable: 'BASEPROJECT_DATABASE_NAME'),
-                     string(credentialsId: 'dbuser', variable: 'BASEPROJECT_DATABASE_USER'),
-                     string(credentialsId: 'dbpassword', variable: 'BASEPROJECT_DATABASE_PASSWORD')
-                 ]) {
-                     sh './mvnw clean install'
-                 }
-             }
-         }
-     }
+                script {
+                    withCredentials([
+                        string(credentialsId: 'dbhost', variable: 'BASEPROJECT_DATABASE_HOST'),
+                        string(credentialsId: 'dbport', variable: 'BASEPROJECT_DATABASE_PORT'),
+                        string(credentialsId: 'dbname', variable: 'BASEPROJECT_DATABASE_NAME'),
+                        string(credentialsId: 'dbuser', variable: 'BASEPROJECT_DATABASE_USER'),
+                        string(credentialsId: 'dbpassword', variable: 'BASEPROJECT_DATABASE_PASSWORD')
+                    ]) {
+                        sh './mvnw clean install'
+                    }
+                }
+            }
+        }
 
         stage('Сборка Docker образа') {
             when {
@@ -32,7 +33,6 @@ pipeline {
             steps {
                 sh 'docker build -t steadydev/themeeight .'
             }
-
         }
 
         stage('Push в Docker Hub') {
@@ -40,11 +40,17 @@ pipeline {
                 branch 'master'
             }
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds',
-                usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'dockerhub-creds',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASS'
+                    )
+                ]) {
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
                     sh 'docker push steadydev/themeeight'
                 }
             }
         }
     }
+}
