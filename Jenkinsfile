@@ -9,18 +9,8 @@ pipeline {
                 sh 'echo $JAVA_HOME'
                 sh 'java -version'
                 sh 'chmod +x mvnw'
+                sh './mvnw clean install'
 
-                script {
-                    withCredentials([
-                        string(credentialsId: 'dbhost', variable: 'BASEPROJECT_DATABASE_HOST'),
-                        string(credentialsId: 'dbport', variable: 'BASEPROJECT_DATABASE_PORT'),
-                        string(credentialsId: 'dbname', variable: 'BASEPROJECT_DATABASE_NAME'),
-                        string(credentialsId: 'dbusername', variable: 'BASEPROJECT_DATABASE_USERNAME'),
-                        string(credentialsId: 'dbpassword', variable: 'BASEPROJECT_DATABASE_PASSWORD')
-                    ]) {
-                        sh './mvnw clean install'
-                    }
-                }
             }
         }
 
