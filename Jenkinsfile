@@ -4,6 +4,10 @@ pipeline {
         jdk 'jdk21'
     }
 
+    environment {
+        TESTCONTAINERS_RYUK_DISABLED = "true"
+    }
+
     stages {
         stage('Сборка') {
             steps {
