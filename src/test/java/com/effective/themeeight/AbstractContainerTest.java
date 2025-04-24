@@ -11,18 +11,18 @@ public abstract class AbstractContainerTest {
     protected static final RedisContainer REDIS_CONTAINER;
 
     protected static final PostgreSQLContainer POSTGRES_CONTAINER;
-    private static final Network NETWORK = Network.builder()
+
+    /*private static final Network NETWORK = Network.builder()
             .createNetworkCmdModifier(cmd -> cmd.withName("testcontainers-net"))
-            .build();
+            .build();*/
 
     static {
         POSTGRES_CONTAINER = new PostgreSQLContainer("postgres:13.4");
-        POSTGRES_CONTAINER.withNetwork(NETWORK)
+        POSTGRES_CONTAINER
                 .withNetworkAliases("postgres-test")
                 .withExposedPorts(5432); // добавим явно порт
         POSTGRES_CONTAINER.start();
         REDIS_CONTAINER = new RedisContainer("redis:7.2.0")
-                .withNetwork(NETWORK)
                 .withNetworkAliases("redis-test")
                 .withExposedPorts(6379);
         REDIS_CONTAINER.start();
