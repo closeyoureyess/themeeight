@@ -25,7 +25,7 @@ public abstract class AbstractContainerTest {
                 .withNetwork(NETWORK)
                 .withNetworkAliases("redis-test")
                 .withExposedPorts(6379);
-        REDIS_CONTAINER.start();с
+        REDIS_CONTAINER.start();
     }
 
     @DynamicPropertySource
