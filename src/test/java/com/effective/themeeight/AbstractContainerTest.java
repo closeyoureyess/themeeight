@@ -11,7 +11,9 @@ public abstract class AbstractContainerTest {
     protected static final RedisContainer REDIS_CONTAINER;
 
     protected static final PostgreSQLContainer POSTGRES_CONTAINER;
-    private static final Network NETWORK = Network.newNetwork();
+    private static final Network NETWORK = Network.builder()
+            .createNetworkCmdModifier(cmd -> cmd.withName("testcontainers-net"))
+            .build();
 
     static {
         POSTGRES_CONTAINER = new PostgreSQLContainer("postgres:13.4");
