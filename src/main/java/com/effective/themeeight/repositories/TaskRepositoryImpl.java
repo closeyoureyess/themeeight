@@ -18,7 +18,6 @@ import java.util.Optional;
 import static com.effective.themeeight.other.ConstantsClass.*;
 
 @Slf4j
-@Repository
 public class TaskRepositoryImpl implements TaskRepository {
 
     private final JdbcTemplate jdbcTemplate;

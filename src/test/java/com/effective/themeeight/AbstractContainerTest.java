@@ -15,11 +15,13 @@ public abstract class AbstractContainerTest {
 
     static {
         POSTGRES_CONTAINER = new PostgreSQLContainer("postgres:13.4");
-        POSTGRES_CONTAINER.withNetwork(NETWORK);
-        POSTGRES_CONTAINER.start();
+        POSTGRES_CONTAINER.withNetwork(NETWORK)
+                .withNetworkAliases("postgres-test")
+                .start();
         REDIS_CONTAINER = new RedisContainer("redis:7.2.0");
-        REDIS_CONTAINER.withNetwork(NETWORK);
-        REDIS_CONTAINER.start();
+        REDIS_CONTAINER.withNetwork(NETWORK)
+                .withNetworkAliases("redis-test")
+                .start();
     }
 
     @DynamicPropertySource
