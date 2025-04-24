@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-@ActiveProfiles("application-test")
+@ActiveProfiles("test")
 class TaskRepositoryTest extends AbstractContainerTest {
 
     @Mock

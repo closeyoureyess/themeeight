@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-@ActiveProfiles("application-test")
+@ActiveProfiles("test")
 class TaskServicesTest extends AbstractContainerTest {
 
     @Mock

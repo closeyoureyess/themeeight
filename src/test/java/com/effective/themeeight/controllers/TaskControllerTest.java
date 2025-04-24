@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("application-test")
+@ActiveProfiles("test")
 class TaskControllerTest extends AbstractContainerTest {
 
     @Autowired
