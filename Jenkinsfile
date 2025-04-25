@@ -40,6 +40,7 @@ pipeline {
                         passwordVariable: 'DOCKER_PASS'
                     )
                 ]) {
+                    echo "pushing $IMAGE_NAME:$TAG"
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
                     sh 'docker push steadydev/themeeight'
                 }
