@@ -21,8 +21,7 @@ pipeline {
 
         stage('Сборка Docker образа') {
             when {
-            sh 'echo Current branch is: $BRANCH_NAME'
-                branch 'master'
+                branch 'origin/master'
             }
             steps {
                 sh 'docker build -t steadydev/themeeight .'
@@ -31,7 +30,7 @@ pipeline {
 
         stage('Push в Docker Hub') {
             when {
-                branch 'master'
+                branch 'origin/master'
             }
             steps {
                 withCredentials([
