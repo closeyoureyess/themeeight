@@ -19,31 +19,9 @@ pipeline {
             }
         }
 
-        stage('Сборка Docker образа') {
-            when {
-                branch 'origin/master'
-            }
+        stage {
             steps {
-                sh 'docker build -t steadydev/themeeight .'
-            }
-        }
-
-        stage('Push в Docker Hub') {
-            when {
-                branch 'origin/master'
-            }
-            steps {
-                withCredentials([
-                    usernamePassword(
-                        credentialsId: 'dockerhub-creds',
-                        usernameVariable: 'DOCKER_USER',
-                        passwordVariable: 'DOCKER_PASS'
-                    )
-                ]) {
-                    echo "pushing $IMAGE_NAME:$TAG"
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                    sh 'docker push steadydev/themeeight'
-                }
+                    sh 'echo Current branch is: $BRANCH_NAME'
             }
         }
     }
