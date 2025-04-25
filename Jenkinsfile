@@ -3,7 +3,6 @@ pipeline {
     tools {
         jdk 'jdk21'
     }
-
     environment {
         TESTCONTAINERS_RYUK_DISABLED = "true"
         TESTCONTAINERS_HOST_OVERRIDE = 'host.docker.internal'
