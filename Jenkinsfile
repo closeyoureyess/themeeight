@@ -21,6 +21,7 @@ pipeline {
 
         stage('Сборка Docker образа') {
             when {
+            sh 'echo Current branch is: $BRANCH_NAME'
                 branch 'master'
             }
             steps {
