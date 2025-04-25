@@ -19,7 +19,7 @@ pipeline {
             }
         }
 
-        stage {
+        stage('Этап 2') {
             steps {
                     sh 'echo Current branch is: $BRANCH_NAME'
             }
