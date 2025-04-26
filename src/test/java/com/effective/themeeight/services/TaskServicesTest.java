@@ -52,7 +52,6 @@ class TaskServicesTest extends AbstractContainerTest {
         Mockito.when(taskMapper.convertTasksToDto(Mockito.any())).thenReturn(taskDto);
 
         TaskDto createdTask = taskServices.createTasks(taskDto);
-
         Assertions.assertNotNull(createdTask);
         Assertions.assertEquals("Test Task", createdTask.getTitle());
         Mockito.verify(taskRepository, Mockito.times(1)).save(Mockito.any(Task.class));
