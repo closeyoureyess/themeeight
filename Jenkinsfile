@@ -3,26 +3,57 @@ pipeline {
     tools {
         jdk 'jdk21'
     }
+
     environment {
         TESTCONTAINERS_RYUK_DISABLED = "true"
         TESTCONTAINERS_HOST_OVERRIDE = 'host.docker.internal'
     }
 
     stages {
+        stage('info') {
+          steps {
+            sh 'echo $JAVA_HOME'
+            sh 'java -version'
+        }
+        }
         stage('Сборка') {
             steps {
-                sh 'echo $JAVA_HOME'
-                sh 'java -version'
+                when {
+                     changeRequest(target: 'dev')
+                }
                 sh 'chmod +x mvnw'
                 sh './mvnw clean install'
-
             }
         }
 
-        stage('Этап 2') {
-            steps {
-                    sh 'echo Current branch is: $BRANCH_NAME'
-            }
+        stage('Сборка Docker образа') {
+                    when {
+                        branch 'master'
+                    }
+                    steps {
+                        sh 'docker build -t steadydev/themeeight .'
+                    }
+
+                }
+
+                stage('Push в Docker Hub') {
+                    when {
+                        branch 'master'
+                    }
+
+                    steps {
+                        withCredentials([
+                            usernamePassword(
+                                credentialsId: 'dockerhub-creds',
+                                usernameVariable: 'DOCKER_USER',
+                                passwordVariable: 'DOCKER_PASS'
+                            )
+                        ]) {
+                            echo "pushing $IMAGE_NAME:$TAG"
+                            sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                            sh 'docker push steadydev/themeeight'
+                        }
+                    }
+                }
         }
     }
-}
