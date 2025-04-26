@@ -14,10 +14,10 @@ pipeline {
         }
         }
         stage('Сборка') {
+        when {
+                             changeRequest(target: 'dev')
+                        }
             steps {
-                when {
-                     changeRequest(target: 'dev')
-                }
                 sh 'chmod +x mvnw'
                 sh './mvnw clean install'
             }
