@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools {
-        jdk 'jdk21'
-    }
 
     environment {
         TESTCONTAINERS_RYUK_DISABLED = "true"
