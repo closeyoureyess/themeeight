@@ -36,7 +36,6 @@ pipeline {
 
                 }
 
-
                 stage('Push в Docker Hub') {
                     when {
                         branch 'master'
