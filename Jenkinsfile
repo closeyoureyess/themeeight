@@ -32,10 +32,11 @@ pipeline {
                         sh 'docker build -t steadydev/themeeight .'
                     }
                 }
+                }
 
                 stage('Push в Docker Hub') {
                     when {
-                        branch 'origin/master'
+                        branch 'master'
                     }
                     steps {
                         withCredentials([
@@ -53,4 +54,3 @@ pipeline {
                 }
         }
     }
-}
