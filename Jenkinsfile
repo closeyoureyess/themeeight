@@ -14,6 +14,7 @@ pipeline {
             sh 'echo $JAVA_HOME'
             sh 'java -version'
         }
+        }
         stage('Сборка') {
             steps {
                 when {
