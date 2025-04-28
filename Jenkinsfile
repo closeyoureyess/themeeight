@@ -44,7 +44,6 @@ pipeline {
                     when {
                         branch 'master'
                     }
-
                     steps {
                         withCredentials([
                             usernamePassword(
