@@ -17,7 +17,6 @@ pipeline {
             sh 'java -version'
         }
         }
-
         stage('Сборка') {
 
         when {
