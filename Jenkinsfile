@@ -18,6 +18,7 @@ pipeline {
         }
         }
         stage('Сборка') {
+
         when {
                              changeRequest(target: 'dev')
                         }
