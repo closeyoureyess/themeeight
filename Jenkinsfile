@@ -8,6 +8,8 @@ pipeline {
     environment {
         TESTCONTAINERS_RYUK_DISABLED = "true"
         TESTCONTAINERS_HOST_OVERRIDE = 'host.docker.internal'
+        IMAGE_NAME = 'steadydev/themeeight'
+        TAG = 'latest'
     }
 
     stages {
