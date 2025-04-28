@@ -8,7 +8,6 @@ pipeline {
         TESTCONTAINERS_RYUK_DISABLED = "true"
         TESTCONTAINERS_HOST_OVERRIDE = 'host.docker.internal'
     }
-
     stages {
         stage('info') {
           steps {
